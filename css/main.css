@@ -1,0 +1,88 @@
+/*
+	Bootstrap template project
+	Robert Porter
+	Version 0.0.1
+*/
+/* BASE - base styles, Variables, mixins, etc */
+html, body {
+  margin: 0 !important;
+  padding: 0 !important; }
+
+h1, h2, h3, h4, h5, h6, p, blockquote, address, big, cite, code, em, font, img, small, strike, sub, sup, li, ol, ul, fieldset, form, label, legend, button, table, caption, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100%;
+  line-height: 1;
+  font-family: inherit;
+  text-align: left; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote:before,
+blockquote:after {
+  content: ""; }
+
+a {
+  outline: none; }
+
+input[type=search] {
+  -moz-appearance: none;
+  -webkit-appearance: none; }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none; }
+
+a:link,
+a:visited {
+  color: #FFF;
+  text-decoration: none; }
+
+/*button highlight fixer*/
+button:focus {
+  outline: 0; }
+
+.debug-col1 {
+  background-color: #a0a0a0; }
+
+.debug-col2 {
+  background-color: #b0b0b0; }
+
+.debug-col3 {
+  background-color: #a5a5a5; }
+
+.RJP-list {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0; }
+
+#quest-space {
+  height: 100%; }
+
+.RJP-highten {
+  height: 500px; }
+
+.RJP-content {
+  /*height: calc(100% - 40px);*/
+  padding-bottom: 80px;
+  height: 100%;
+  overflow: auto; }
+
+.RJP-width-fixer {
+  width: 250px; }
+
+/* MODULES - misc site elements */
+/* LAYOUTS - Page lout styles */
+
+/*# sourceMappingURL=main.css.map */

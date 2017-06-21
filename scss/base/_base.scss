@@ -1,0 +1,37 @@
+.debug-col1{
+	background-color: #a0a0a0;
+}
+
+.debug-col2{
+	background-color: #b0b0b0;
+}
+
+.debug-col3{
+	background-color: #a5a5a5;
+}
+
+.RJP-list{
+	list-style: none;
+	width:100%;
+	padding: 0;
+	margin: 0;
+}
+
+#quest-space{
+	height:100%;
+}
+
+.RJP-highten{
+	height: 500px;
+}
+
+.RJP-content{
+	/*height: calc(100% - 40px);*/
+	padding-bottom: 80px;
+	height: 100%;
+	overflow: auto;
+}
+
+.RJP-width-fixer{
+	width:250px;
+}

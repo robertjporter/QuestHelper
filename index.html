@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quest Helper</title>
+	
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+	
+	<!-- Bootstrap javaScript and Jquery dependencies -->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	
+	<!-- Font Awesome CSS -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+	
+	<!-- SASS compiled CSS -->
+    <link href="css/main.css" rel="stylesheet">
+	
+
+	
+	<!--Nav bar-->
+	<nav class="navbar navbar-inverse navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Qest Helper</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+			<!-- php IF logged in then-->
+            <li class="active"><a href="index.html">Veiw Quests</a></li>
+            <li><a href="about.html">Add Quest</a></li>
+            <li><a href="contact.html">Profile</a></li>
+			<li><a href="#">Sign Out</a></li>
+		    <!-- php ELSE-->
+			<li><a href="#">Register</a></li>
+			<li>
+				<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					Log in
+					<span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<form action='inc/login.inc.php' method='POST'>
+						<input type='text' name='uid' placeholder='User Name'>
+						<input type='password' name='pwd' placeholder='Password'>
+						<button type='submit' class='btn btn-default'>LOG IN</button>
+						<button href="passwordRest.html" class='btn btn-default'>Forgot Password?</button>
+					</form>
+				  </ul>
+				 </div>
+			</li>
+		  </ul>
+		  <!-- php END IF-->
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  </head>
+  
+	<!-------------------- END header.php -------------------->
+	<!-------------------- START veiw-quests.php -------------------->
+  <body>
+		<div class="container RJP-highten">
+			<div id="quest-space" class="row RJP-highten debug-col1">
+				<!-- quest browser -->
+				<div id="quest-browser" class="col-md-6 RJP-highten debug-col2">
+					<!-- quest browser navigation -->
+						<br>
+						<ul class="nav nav-tabs nav-justified">
+							<li class="active"><a data-toggle="tab" href="#home">Available</a></li>
+							<li><a data-toggle="tab" href="#menu1">Active</a></li>
+							<li><a data-toggle="tab" href="#menu2">Completed</a></li>
+						</ul>
+					<!-- END quest browser navigation -->
+					<div id="quest-browser-content" class="tab-content RJP-content">
+				
+						<!-- Available list -->
+						<div id="home" class="tab-pane fade in active RJP-content">
+							<!-- list search -->
+						  <li class="list-group-item">
+							<div class="input-group">
+							  <input type="text" class="form-control" placeholder="Search available quests">
+							  <span class="input-group-btn">
+								<button class="btn btn-default" type="button">Search</button>
+							  </span>
+							</div>
+						  </li>
+						  <!-- END list search -->
+						  
+						  <!-- list key -->
+						  <li class="list-group-item">
+						    <span>Name</span>
+							<span class="pull-right">
+								Payout / Hours
+							</span>
+						  </li>
+						  <!-- END list key -->
+						  
+						  <!-- Build a for-each loop based on this-->
+						  <li class="list-group-item">
+							<span class="badge">14hrs</span> 
+							<span class="badge">$200</span> 
+							Item one
+						  </li>
+						  <!-- END for-each loop-->
+						  
+						  <!-- Filler for HTML burn when php is in-->
+						  <li class="list-group-item"><span class="badge">56hrs</span><span class="badge">$1900</span> Item two</li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$50</span> Item three</li>
+						  <li class="list-group-item"><span class="badge">200hrs</span> <span class="badge">$20000</span> Item four </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$400ph</span> Item five</li>
+						  <li class="list-group-item"><span class="badge">56hrs</span> <span class="badge">$1900</span> Item two </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$50ph</span> Item three</li>
+						  <li class="list-group-item"><span class="badge">200hrs</span> <span class="badge">$20000</span> Item four  </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$400</span> Item five</li>
+						  <li class="list-group-item"><span class="badge">56hrs</span><span class="badge">$1900</span> Item two</li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$50</span> Item three</li>
+						  <li class="list-group-item"><span class="badge">200hrs</span> <span class="badge">$20000</span> Item four </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$400ph</span> Item five</li>
+						  <li class="list-group-item"><span class="badge">56hrs</span> <span class="badge">$1900</span> Item two </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$50ph</span> Item three</li>
+						  <li class="list-group-item"><span class="badge">200hrs</span> <span class="badge">$20000</span> Item four  </li>
+						  <li class="list-group-item"><span class="badge">4hrs</span> <span class="badge">$400</span> Item five</li>
+						  <!-- END filler-->
+						</div>
+						<!-- END Available list-->
+						
+						<!-- Active list -->
+						<div id="menu1" class="tab-pane fade">
+						  <h3>Menu 1</h3>
+						  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<!-- list search -->
+							<!-- END list search -->
+							  
+							<!-- list key -->
+							<!-- END list key -->
+							  
+							<!-- Build a for-each loop based on this-->
+							<!-- END for-each loop-->
+							  
+							<!-- Filler for HTML burn when php while loop is in-->
+							<!-- END filler-->
+						</div>
+						<!-- END Active list-->
+						
+						<!-- Completed list -->
+						<div id="menu2" class="tab-pane fade">
+						  <h3>Menu 2</h3>
+						  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<!-- list search -->
+							<!-- END list search -->
+							  
+							<!-- list key -->
+							<!-- END list key -->
+							  
+							<!-- Build a for-each loop based on this-->
+							<!-- END for-each loop-->
+							  
+							<!-- Filler for HTML burn when php while loop is in-->
+							<!-- END filler-->
+						</div>
+						<!-- END Completed list-->
+					</div>
+				</div><!-- END quest browser -->
+				
+				
+				
+				<!-- quest info/history -->
+				<div id="quest-main" class="col-md-6 RJP-highten debug-col2">
+					<!-- Quest INFO page -->
+					<div id="questinfo">
+						<div class="container questinfo-header"> <!-- Banner img as css background -->
+							<button id="toQuestLog" class="questinfo-nav">quest Log</button>
+							<span class="queststatusicon glyphicon glyphicon-star"></span>
+							<span class="quest-title">Hello world</span>
+						</div>
+						
+						<div class="container questinfo-essentials"> <!-- Banner img as css background -->
+							<span class="">reward</span>
+							<!-- PHP if started-->
+								<span class="">Time started</span>
+								<span class="">Time till completion</span>
+								<span class="">Time remaining</span>
+								<span class="quest-timebar">Hello world Hello world Hello world Hello world Hello world</span>
+							<!-- PHP else add an "accept" button -->
+							<br>
+							<span>granted items</span>
+							<!-- Tooltip filename -->
+							<!-- PHP IF accepted allow download -->
+								<span class="queststatusicon glyphicon glyphicon-file"></span>
+								<span class="queststatusicon glyphicon glyphicon-file"></span>
+								<span class="queststatusicon glyphicon glyphicon-file"></span>
+						</div>	
+						
+						<div class="container questinfo-body"> <!-- Banner img as css background -->
+							<br><br><span>Description</span><br>
+							Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+							<!--PHP if there is info in location pannel add in google maps api -->
+							<br><br><span>Location</span>
+							
+							<br><br><span>Objectives</span><br>
+							It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+							<br><br>
+							The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. 
+							<br><br>
+							Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. 
+							<br><br>
+							Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+							<br><br>
+							
+							<span>Client</span>
+								<!--PHP again if there is info in location pannel add in google maps api -->
+						</div>
+					</div> <!-- END Quest INFO page -->
+					
+					<!-- Quest LOG page -->
+					<div id="questlog">
+						<button id="toQuestInfo" class="questinfo-nav">quest Info</button>
+						Quest log
+					</div> <!-- END Quest LOG page -->
+					
+					<!-- -->
+					<script>
+						//Bootstrap didn't want to share it's dynamic nav-bar (don't judge me)
+						$("#questlog").hide();
+						
+						$("#toQuestLog").click(function(){
+							$("#questinfo").hide();
+							$("#questlog").show();
+						});
+	
+						$("#toQuestInfo").click(function(){
+							$("#questlog").hide();
+							$("#questinfo").show();
+						});
+					</script>
+				</div><!-- END quest main -->
+			</div><!-- END quest space -->
+		</div> <!-- END primary container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+    
+	<!----------------------END veiw-quests.php -------------------->
+	<!----------------------START Footer.php -------------------->
+	
+  </body>
+</html>
