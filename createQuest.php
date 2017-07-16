@@ -46,7 +46,6 @@ include 'navigation.php';
 		<textarea rows="10" id='description' name='description' class='comment_box'></textarea>
 		<br><br>
 		
-		<!----------------------------- ---------------------->  
 		<script>
 			$objNo = 1;
 			function add_objective(){
@@ -58,8 +57,6 @@ include 'navigation.php';
 				 $('#'+objNo).remove();
 			}
 		</script>
-		
-		
 		
 		<ul id="objectives">
 			<li class="objective_container">
@@ -75,10 +72,6 @@ include 'navigation.php';
 		<br>
 		
 		<input type="button" onclick="add_objective();" value="ADD OBJECTIVE">
-		
-		<!------------------------- ---------------------------->
-		
-		<!-- -->
 		
 		<br><br><br>
 		

@@ -1,50 +1,132 @@
 <?php include 'header.php';
 include 'navigation.php';
+
+//Picking out relative row and pulling data into variable.
+	$qid = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+	
+	//Get Quest data
+	$sql = "SELECT * FROM quests WHERE qid='$qid';";
+	$result = $conn->query($sql);
+	$row = $result->fetch_assoc();
+	
 ?>
 <!-- Quest INFO page -->
 <br><br><br>
 <div id="questinfo">
+	<!-- HEADER -->
 	<div class="container questinfo-header"> <!-- Banner img as css background -->
-		<button id="toQuestLog" class="questinfo-nav">quest Log</button>
-		<span class="queststatusicon glyphicon glyphicon-star"></span>
-		<span class="quest-title">Hello world</span>
+		<button id="toQuestLog" class="questinfo-nav">Message</button>
+		<button id="toQuestLog" class="questinfo-nav">Quest Log</button>
+		
+		<!-- Cost/Reward-->
+		<br>
+		<?php 
+			if ($row[reward]>0){
+				echo "<span class=''>$".$row[reward]."</span>";
+			}
+		?>
+		<span class=""><?php echo $row[hrsReq]; ?>hrs</span>
+		<br>
+		
+		<!-- Star rating -->
+		<?php
+			$i = 0;
+			while ($i < $row[difficulty]) {
+				$i++;
+				echo "<span class='glyphicon glyphicon-star'></span>";
+			}
+		?>
+		<br>
+		
+		<!-- Title -->
+		<span class="quest-title">
+			<?php echo $row[title]; ?>
+		</span>
 	</div>
 	
+	<!-- TIME VITALS -->
 	<div class="container questinfo-essentials"> <!-- Banner img as css background -->
-		<span class="">reward</span>
-		<!-- PHP if started-->
-			<span class="">Time started</span>
-			<span class="">Time till completion</span>
-			<span class="">Time remaining</span>
-			<span class="quest-timebar">Hello world Hello world Hello world Hello world Hello world</span>
+			<?php
+				//Gather all date times
+				$d1= new DateTime($row[subdate]); 
+				$d2= new DateTime($row[duedate]);
+				$date = new DateTime(date('Y-m-d H:i:s'));
+				
+				//Calculate hours between submition date and due date
+				$interval= $d1->diff($d2);
+				$totalHours = ($interval->days * 24) + $interval->h;
+				
+				//Calculate Hours between submition date and current date
+				$interval2= $d1->diff($date);
+				$passedHours = ($interval2->days * 24) + $interval2->h;
+				
+				//Calculate Percentage for progress bar
+				$percent = 100*($passedHours/$totalHours);
+				$percent2 = floor($percent);
+			?>
+			<!--Date due progress bar-->
+			<span class="">Start <?php echo $d1->format('d/m/y');?></span>
+			<span class="">End <?php echo $d2->format('d/m/y');?></span>
+			<div class="progress">
+				<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<?php echo $percent2;?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $percent2;?>%">
+				</div>
+			</div>
+			
+			<?php 
+				//Calculate Percentage for next progress bar
+				$hrspercent = 100*($row[hrsDone]/$row[hrsReq]);
+				$hrspercent2 = floor($hrspercent);
+			?>
+			
+			<!--Hours spent progress bar-->
+			<span class="">Hrs Spent <?php  echo $row[hrsDone]; ?></span>
+			<span class="">Estimated Hrs <?php  echo $row[hrsReq]; ?></span>
+			<div class="progress">
+				<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<?php echo $hrspercent2;?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $hrspercent2;?>%">
+				</div>
+			</div>
 		<!-- PHP else add an "accept" button -->
-		<br>
-		<span>granted items</span>
-		<!-- Tooltip filename -->
-		<!-- PHP IF accepted allow download -->
-			<span class="queststatusicon glyphicon glyphicon-file"></span>
-			<span class="queststatusicon glyphicon glyphicon-file"></span>
-			<span class="queststatusicon glyphicon glyphicon-file"></span>
 	</div>	
-	
-	<div class="container questinfo-body"> <!-- Banner img as css background -->
-		<br><br><span>Description</span><br>
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-		<!--PHP if there is info in location pannel add in google maps api -->
-		<br><br><span>Location</span>
+	<!-- BODY -->
+	<div class="container questinfo-body"> 
+		<span>Description</span><br>
+		<?php echo $row[description]; ?>
 		
-		<br><br><span>Objectives</span><br>
-		It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
-		<br><br>
-		The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. 
-		<br><br>
-		Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. 
-		<br><br>
-		Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-		<br><br>
+		<!-- Objectives -->
+		<br><br><span>Objectives</span>
+		<?php
+			//Get objective data
+			$objSql = "SELECT * FROM objectives WHERE qid='$qid' ORDER BY oid;";
+			$objResult = $conn->query($objSql);
+			
+			//loop through objectives
+			$obj = 1;
+			if ($objResult->num_rows > 0) {
+			while($ObjRow = $objResult->fetch_assoc()) {
+				?>
+				<br>
+				<button data-toggle="collapse" data-target="#obj<?php echo $obj; ?>">
+					<!-- Identify if competed or not and echo the right glyph -->
+					<?php if ($ObjRow[completion]>0){
+					echo "<span class='glyphicon glyphicon-ok' style='color:green'></span>";
+					} else {
+						echo "<span class='glyphicon glyphicon-play-circle' style='color:orange'></span>";
+					}?>
+					<!-- Objective Title -->
+					<?php echo $ObjRow[objTitle]; ?>
+					<span class='glyphicon glyphicon-chevron-down' style='color:black'></span>
+				</button>
+				
+				<!-- Dropdown menu with objective Description-->
+				<div id="obj<?php echo $obj; ?>" class="collapse">
+					<?php echo $ObjRow[objDescription]; ?>
+				</div>
+				<?php $obj++;
+			}};
+		?>
 		
-		<span>Client</span>
-			<!--PHP again if there is info in location pannel add in google maps api -->
+		<br><br><br><br>
+		<!-- Accept -->
 	</div>
 </div> <!-- END Quest INFO page -->
 
